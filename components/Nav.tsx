@@ -46,7 +46,11 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-                src={session?.user.image}
+                src={
+                  typeof session?.user.image === "string"
+                    ? session?.user.image
+                    : "/images/logo.svg"
+                }
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -77,7 +81,11 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src={session?.user.image}
+              src={
+                typeof session?.user.image === "string"
+                  ? session?.user.image
+                  : "/images/logo.svg"
+              }
               width={37}
               height={37}
               className="rounded-full"
@@ -96,7 +104,7 @@ const Nav = () => {
                   setToggleDropdown={setToggleDropdown}
                 />
                 <DropdownLink
-                  link="/create_prompt"
+                  link="/create-prompt"
                   text="Create prompt"
                   setToggleDropdown={setToggleDropdown}
                 />
