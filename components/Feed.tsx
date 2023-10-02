@@ -28,7 +28,8 @@ const Feed = () => {
     const tagSearch = searchText[0] === "#" ? searchText.slice(1) : searchText;
     return (
       creator.toLowerCase().includes(searchText.toLowerCase()) ||
-      post.tag.toLowerCase().includes(tagSearch.toLowerCase())
+      post.tag.toLowerCase().includes(tagSearch.toLowerCase()) ||
+      post.prompt.toLowerCase().includes(searchText.toLowerCase())
     );
   });
 
