@@ -10,7 +10,7 @@ export const GET = async (req, { params }) => {
     if (!prompt) {
       return new Response("Post not found", { status: 404 });
     }
-    return new Response(JSON.stringify(prompts), { status: 200 });
+    return new Response(JSON.stringify(prompt), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch a post", { status: 500 });
   }
@@ -37,7 +37,6 @@ export const PATCH = async (req, { params }) => {
 };
 
 export const DELETE = async (req, { params }) => {
-  const { prompt, tag } = await req.json();
   try {
     await connectToDB();
     await Prompt.findByIdAndRemove(params.id);

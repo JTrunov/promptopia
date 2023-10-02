@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
@@ -9,7 +9,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
       {data.map((post) => {
         return (
           <PromptCard
-            key={post.id}
+            key={post._id}
             post={post}
             handleTagClick={handleTagClick}
           />
@@ -23,7 +23,14 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const handleSearchChange = (e) => {};
+  const filteredPosts = posts.filter((post) => {
+    const creator = post.creator.username;
+    const tagSearch = searchText[0] === "#" ? searchText.slice(1) : searchText;
+    return (
+      creator.toLowerCase().includes(searchText.toLowerCase()) ||
+      post.tag.toLowerCase().includes(tagSearch.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,9 +42,22 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  const handleSearchChange = (e) => {
+    const newSearch = e.target.value.toString();
+
+    setSearchText(newSearch);
+  };
+
+  const handleTagClick = (post) => {
+    setSearchText("#" + post.tag);
+  };
+
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
+      <form
+        className="relative w-full flex-center"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <input
           type="text"
           placeholder="Search for a tag or a username"
@@ -47,7 +67,10 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList
+        data={searchText === "" ? posts : filteredPosts}
+        handleTagClick={handleTagClick}
+      />
     </section>
   );
 };
