@@ -44,7 +44,7 @@ const EditPrompt = () => {
         method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,
-          userId: session?.user.id,
+          userId: session?.user?.id,
           tag: post.tag,
         }),
       });
