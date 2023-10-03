@@ -44,7 +44,7 @@ const Nav = () => {
             >
               Sign out
             </button>
-            <Link href="/profile">
+            <Link href={`/profile?id=${session.user.id}`}>
               <Image
                 src={
                   typeof session?.user.image === "string"
@@ -99,7 +99,7 @@ const Nav = () => {
             {toggleDropdown && (
               <div className="dropdown">
                 <DropdownLink
-                  link="/profile"
+                  link={`/profile?id=${session.user.id}`}
                   text="My profile"
                   setToggleDropdown={setToggleDropdown}
                 />
