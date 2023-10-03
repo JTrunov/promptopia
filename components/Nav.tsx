@@ -2,7 +2,7 @@
 import { signOut, getProviders, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DropdownLink from "./DropdownLink";
 
 const Nav = () => {

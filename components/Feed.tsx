@@ -21,7 +21,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
 
   const filteredPosts = posts.filter((post) => {
     const creator = post.creator.username;
