@@ -4,10 +4,11 @@ import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Profile from "@components/Profile";
 import { useEffect, useState } from "react";
+import { PromptType } from "@types";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PromptType[]>([]);
   const [username, setUsername] = useState("");
   const router = useRouter();
   const params = useSearchParams();
@@ -16,7 +17,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch(`/api/users/${userId}/posts`);
-      const data = await response.json();
+      const data: PromptType[] = await response.json();
       setPosts(data);
     };
 
@@ -27,11 +28,11 @@ const ProfilePage = () => {
     setUsername(posts[0]?.creator.username);
   }, [posts]);
 
-  const handleEdit = (post) => {
+  const handleEdit = (post: PromptType) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
 
-  const handleDelete = async (post) => {
+  const handleDelete = async (post: PromptType) => {
     const hasConfirmed = confirm(
       "Are you sure you want to delete this prompt?"
     );
@@ -54,8 +55,12 @@ const ProfilePage = () => {
 
   return (
     <Profile
-      name={userId === session?.user.id ? "My" : username}
-      desc="Welcome to your personalized page"
+      name={userId === session?.user?.id ? "My" : username}
+      desc={
+        userId === session?.user?.id
+          ? "Welcome to your personalized page"
+          : "See all posts of the user"
+      }
       data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

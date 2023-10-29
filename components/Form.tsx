@@ -1,19 +1,7 @@
+import { FormProps } from "@types";
 import Link from "next/link";
 
-type Post = {
-  prompt: string;
-  tag: string;
-};
-
-type Props = {
-  type: string;
-  post: Post;
-  setPost: any;
-  submitting: boolean;
-  handleSubmit: any;
-};
-
-const Form = ({ type, post, setPost, submitting, handleSubmit }: Props) => {
+const Form = ({ type, post, setPost, submitting, handleSubmit }: FormProps) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_text text-left">

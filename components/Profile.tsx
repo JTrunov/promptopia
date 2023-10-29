@@ -1,6 +1,13 @@
 import PromptCard from "@components/PromptCard";
+import { ProfileProps } from "@types";
 
-const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
+const Profile = ({
+  name,
+  desc,
+  data,
+  handleEdit,
+  handleDelete,
+}: ProfileProps) => {
   return (
     <section className="w-full">
       <h1 className="head_text text-left">

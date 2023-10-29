@@ -4,9 +4,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import { data } from "autoprefixer";
+import { PromptCardProps } from "@types";
 
-const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+const PromptCard = ({
+  post,
+  handleTagClick,
+  handleEdit,
+  handleDelete,
+}: PromptCardProps) => {
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();

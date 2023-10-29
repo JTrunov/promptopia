@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   text: string;
   link: string;
-  setToggleDropdown: Dispatch<SetStateAction<boolean>>;
+  setToggleDropdown: (arg: boolean) => void;
 };
 
 const DropdownLink = ({ link, text, setToggleDropdown }: Props) => {

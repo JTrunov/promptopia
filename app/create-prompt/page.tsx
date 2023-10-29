@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 const CreatePrompt = () => {
   const router = useRouter();
   const { data: session } = useSession();
-
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     prompt: "",
@@ -24,7 +23,7 @@ const CreatePrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user?.id,
-          tag: post.tag,
+          tag: post.tag[0] === "#" ? post.tag.slice(1) : post.tag,
         }),
       });
 

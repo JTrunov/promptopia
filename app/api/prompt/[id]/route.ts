@@ -1,8 +1,14 @@
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
 
+interface Params {
+  params: {
+    id: string;
+  };
+}
+
 // read the prompt
-export const GET = async (req, { params }) => {
+export const GET = async ({ params }: Params) => {
   try {
     await connectToDB();
 
@@ -16,7 +22,10 @@ export const GET = async (req, { params }) => {
   }
 };
 
-export const PATCH = async (req, { params }) => {
+export const PATCH = async (
+  req: Request,
+  { params }: { params: { id: string } }
+) => {
   const { prompt, tag } = await req.json();
 
   try {
@@ -36,7 +45,7 @@ export const PATCH = async (req, { params }) => {
   }
 };
 
-export const DELETE = async (req, { params }) => {
+export const DELETE = async ({ params }: Params) => {
   try {
     await connectToDB();
     await Prompt.findByIdAndRemove(params.id);

@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import PromptCard from "./PromptCard";
+import { PromptCardListProps, PromptType, UserType } from "@types";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick }: PromptCardListProps) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => {
@@ -21,7 +22,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
-  const [posts, setPosts] = useState<any>([]);
+
+  const [posts, setPosts] = useState<PromptType[]>([]);
 
   const filteredPosts = posts.filter((post) => {
     const creator = post.creator.username;
@@ -36,20 +38,22 @@ const Feed = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch("/api/prompt");
-      const data = await response.json();
+      const data: PromptType[] = await response.json();
       setPosts(data);
     };
 
     fetchPosts();
   }, []);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
     const newSearch = e.target.value.toString();
 
     setSearchText(newSearch);
   };
 
-  const handleTagClick = (post) => {
+  const handleTagClick = (post: PromptType) => {
     setSearchText("#" + post.tag);
   };
 
