@@ -8,7 +8,7 @@ interface Params {
 }
 
 // read the prompt
-export const GET = async ({ params }: Params) => {
+export const GET = async (req: Request, { params }: Params) => {
   try {
     await connectToDB();
 
@@ -45,7 +45,7 @@ export const PATCH = async (
   }
 };
 
-export const DELETE = async ({ params }: Params) => {
+export const DELETE = async (req: Request, { params }: Params) => {
   try {
     await connectToDB();
     await Prompt.findByIdAndRemove(params.id);
