@@ -28,7 +28,7 @@ export interface PromptCardProps {
 
 export interface FormProps {
   type: string;
-  post: PromptType;
+  post: { tag: string; prompt: string };
   setPost: any;
   submitting: boolean;
   handleSubmit: any;
