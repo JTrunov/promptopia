@@ -61,19 +61,13 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers &&
-              Object.values(providers).map((provider) => {
-                return (
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    className="black_btn"
-                  >
-                    Sign in
-                  </button>
-                );
-              })}
+            <button
+              type="button"
+              onClick={() => signIn()}
+              className="black_btn"
+            >
+              Sign in
+            </button>
           </>
         )}
       </div>
@@ -124,19 +118,13 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers &&
-              Object.values(providers).map((provider) => {
-                return (
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    className="black_btn"
-                  >
-                    Sign in
-                  </button>
-                );
-              })}
+            <button
+              type="button"
+              onClick={() => signIn()}
+              className="black_btn"
+            >
+              Sign in
+            </button>
           </>
         )}
       </div>
